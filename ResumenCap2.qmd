@@ -1,0 +1,99 @@
+---
+title: "Regresion lineal simple y multiple"
+author: "Evelyn Faican - Alex Guaman"
+format: pdf
+editor: visual
+---
+
+## Capitulo #2
+
+## ¿Qué es el aprendizaje estadístico?
+
+Para motivar nuestro estudio del aprendizaje estadístico, comenzamos con un simple
+ejemplo. Supongamos que somos consultores estadísticos contratados por un cliente para
+investigar la asociación entre la publicidad y las ventas de un determinado producto. El conjunto de datos de Publicidad consiste en las ventas de ese producto en 200 mercados diferentes, junto con los presupuestos de publicidad del producto en cada uno de esos mercados para tres medios diferentes: televisión, radio y periódicos.
+Los datos se muestran en la Figura 2.1. No es posible para nuestro cliente
+aumentar directamente las ventas del producto. Por otro lado, pueden controlar
+el gasto publicitario en cada uno de los tres medios. Por lo tanto, si nosotros
+determinar que existe una asociación entre la publicidad y las ventas, entonces
+podemos instruir a nuestro cliente para que ajuste los presupuestos de publicidad, indirectamente
+aumentando las ventas. En otras palabras, nuestro objetivo es desarrollar un modelo preciso
+que se puede utilizar para predecir las ventas sobre la base de los tres presupuestos de medios.
+
+## ![](i1.png)
+
+**FIGURA 2.1.** El conjunto de datos de publicidad. El gráfico muestra las ventas, en miles de unidades, en función de los presupuestos de TV, radio y periódicos, en miles de dólares, para 200 mercados diferentes. En cada gráfico mostramos los mínimos cuadrados simples ajuste de las ventas a esa variable, como se describe en el Capítulo 3. En otras palabras, cada azul línea representa un modelo simple que se puede usar para predecir las ventas usando TV, radio, y periódico, respectivamente.
+
+De manera más general, supongamos que observamos una respuesta cuantitativa Y y p
+diferentes predictores, X1, X2, . . . , XP . Suponemos que hay alguna relación entre Y y X = (X1 , X2 , . . . , Xp ), que se puede escribir en la forma muy general.
+
+![](i2.png)
+
+Aquí f es una función fija pero desconocida de X1, . . . , Xp , y ϵ es aleatorio término de error, que es independiente de X y tiene media cero. En esta fórmulación, f representa la información sistemática que X proporciona sobre Y . Como otro ejemplo, considere el panel de la izquierda de la figura 2.2, un gráfico de ingresos versus años de educación para 30 personas en el conjunto de datos de Ingresos. La trama sugiere que uno podría predecir el ingreso usando años de educación. Sin embargo, la función f que conecta la variable de entrada a la variable de salida es en general desconocida. En esta situación se debe estimar
+f en base a los puntos observados. Como Ingreso es un conjunto de datos simulados, f es
+conocido y se muestra mediante la curva azul en el panel de la derecha de la Figura 2.2.
+
+![](i3.png)
+
+**FIGURA 2.2. El conjunto de datos de ingresos. Izquierda: Los puntos rojos son los valores observados de ingresos (en decenas de miles de dólares) y años de educación para 30 personas Derecha: La curva azul representa la verdadera relación subyacente entre ingresos y años de educación, que generalmente se desconoce (pero se conoce en este caso porque los datos fueron simulados). Las líneas negras representan el error, asociado a cada observación. Tenga en cuenta que algunos errores son positivos (si una observacion se encuentra por encima de la curva azul) y algunos son negativos (si una observacion se encuentra debajo de la curva). En general, estos errores tienen aproximadamente una media de cero.**
+
+## ¿Por qué estimar f?
+
+Hay dos razones principales por las que podemos desear estimar f: predicción e inferencia. Discutimos cada uno en su turno.
+
+## Predicción
+
+En muchas situaciones, un conjunto de entradas X están fácilmente disponibles, pero la salida y no se puede obtener fácilmente. En este escenario, dado que el término de error promedia cero, podemos predecir y usando:
+
+![](i4.png)
+
+En general, la función f puede involucrar más de una variable de entrada.
+En la Figura 2.3 representamos el ingreso en función de los años de educación y antigüedad. Aquí f es una superficie bidimensional que debe ser estimada en base a los datos observados.
+
+![](i5.png){fig-align="center" width="512"}
+
+**FIGURA 2.3. El gráfico muestra los ingresos como una función de los años de educación y antigüedad en el conjunto de datos Ingresos. La superficie azul representa la verdadera relación subyacente entre ingresos y años de educación y antigüedad, que se conoce ya que los datos son simulados. Los puntos rojos indican los valores observados de estas cantidades para 30 individuos.**
+
+## ¿Cómo estimamos f?
+
+Se explora muchos enfoques lineales y no lineales para estimar f. Sin embargo, estos métodos generalmente comparten ciertas características. Proporcionamos una descripción general de estas características compartidas en esta sección. Siempre supondremos que hemos observado un conjunto de n puntos de datos diferentes. Por ejemplo, en la Figura 2.2 observamos n = 30 puntos de datos.
+
+Estas observaciones se denominan datos de entrenamiento porque usaremos estas observaciones para entrenar, o enseñar, nuestro método para estimar f . Sea xij el valor del j-ésimo predictor, o entrada, para la observación i, donde i = 1, 2, . . . , nyj = 1, 2, . . . , pag. En consecuencia, sea yi la variable de respuesta para la i-ésima observación. Entonces nuestros datos de entrenamiento consisten en
+
+{(x1, y1), (x2, y2), . . . , (xn , yn )} donde xi = (xi1 , xi2 , . . . , xip )T .
+
+## Métodos paramétricos
+
+Los métodos paramétricos implican un enfoque basado en modelos de dos pasos.
+**1.** Primero, hacemos una suposición sobre la forma funcional, o forma,
+apagado . Por ejemplo, una suposición muy simple es que f es lineal en
+
+**X: f (X) = β0 + β1 X1 + β2 X2 + · · · + βp Xp .**
+
+Este es un modelo lineal, que se analizará extensamente en el capítulo
+ter 3. Una vez que hemos supuesto que f es lineal, el problema de estimación
+ing f se simplifica enormemente. En lugar de tener que estimar un total
+función p-dimensional arbitraria f (X), solo se necesita estimar
+los coeficientes **p + 1 β0 , β1 , . . . , βp .**
+**2.** Después de seleccionar un modelo, necesitamos un procedimiento que use el
+datos de entrenamiento para ajustar o entrenar el modelo. En el caso del modelo lineal, necesitamos estimar los parámetros β0, β1, . . . , βp . Es decir, queremos encontrar valores de estos parámetros tales que
+
+**Y ≈ β 0 + β1 X1 + β2 X2 + · · · + βp Xp .**
+
+![](i6.png){fig-align="center" width="559"}
+
+**FIGURA 2.4. Un modelo lineal ajustado por mínimos cuadrados a los datos de ingresos de la figura 2.3. Las observaciones se muestran en rojo y el plano amarillo indica el ajuste de mínimos cuadrados a los datos.**
+
+El enfoque basado en modelos que se acaba de describir se conoce como paramétrico; reduce el problema de estimar f a uno de estimar un conjunto de parámetros. Asumir una forma paramétrica para f simplifica el problema de estimar f porque generalmente es mucho más fácil estimar un conjunto de parámetros, como β0, β1, . . . , βp en el modelo lineal, que ajustar una función f completamente arbitraria. La desventaja potencial de un enfoque paramétrico es que el modelo que elegimos generalmente no coincidirá con la verdadera forma desconocida de f .
+
+La figura 2.4 muestra un ejemplo del enfoque paramétrico aplicado a los datos de ingresos de la figura 2.3. Hemos ajustado un modelo lineal de la forma
+
+![](i7.png){fig-align="center"}
+
+![](i8.png){fig-align="center"}
+
+**FIGURA 2.5. En amarillo, se muestra un ajuste spline de placa delgada uniforme a los datos de ingresos de la figura 2.3; las observaciones se muestran en rojo.**
+
+## Métodos no paramétricos
+
+Los métodos no paramétricos no hacen suposiciones explícitas sobre la forma funcional de f. En su lugar, buscan una estimación de f que se acerque lo más posible a los puntos de datos sin ser demasiado tosco o ondulado. Dichos enfoques pueden tener una gran ventaja sobre los enfoques paramétricos: al evitar la suposición de una forma funcional particular para f , tienen el potencial de adaptarse con precisión a una gama más amplia de formas posibles para f . Cualquier enfoque paramétrico trae consigo la posibilidad de que la forma funcional utilizada para estimar f sea muy diferente de la f verdadera, en cuyo caso el modelo resultante no se ajustará bien a los datos.
