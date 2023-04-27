@@ -9,33 +9,21 @@ editor: visual
 
 ## ¿Qué es el aprendizaje estadístico?
 
-Para motivar nuestro estudio del aprendizaje estadístico, comenzamos con un simple
-ejemplo. Supongamos que somos consultores estadísticos contratados por un cliente para
-investigar la asociación entre la publicidad y las ventas de un determinado producto. El conjunto de datos de Publicidad consiste en las ventas de ese producto en 200 mercados diferentes, junto con los presupuestos de publicidad del producto en cada uno de esos mercados para tres medios diferentes: televisión, radio y periódicos.
-Los datos se muestran en la Figura 2.1. No es posible para nuestro cliente
-aumentar directamente las ventas del producto. Por otro lado, pueden controlar
-el gasto publicitario en cada uno de los tres medios. Por lo tanto, si nosotros
-determinar que existe una asociación entre la publicidad y las ventas, entonces
-podemos instruir a nuestro cliente para que ajuste los presupuestos de publicidad, indirectamente
-aumentando las ventas. En otras palabras, nuestro objetivo es desarrollar un modelo preciso
-que se puede utilizar para predecir las ventas sobre la base de los tres presupuestos de medios.
+Para motivar nuestro estudio del aprendizaje estadístico, comenzamos con un simple ejemplo. Supongamos que somos consultores estadísticos contratados por un cliente para investigar la asociación entre la publicidad y las ventas de un determinado producto. El conjunto de datos de Publicidad consiste en las ventas de ese producto en 200 mercados diferentes, junto con los presupuestos de publicidad del producto en cada uno de esos mercados para tres medios diferentes: televisión, radio y periódicos. Los datos se muestran en la Figura 2.1. No es posible para nuestro cliente aumentar directamente las ventas del producto. Por otro lado, pueden controlar el gasto publicitario en cada uno de los tres medios. Por lo tanto, si nosotros determinar que existe una asociación entre la publicidad y las ventas, entonces podemos instruir a nuestro cliente para que ajuste los presupuestos de publicidad, indirectamente aumentando las ventas. En otras palabras, nuestro objetivo es desarrollar un modelo preciso que se puede utilizar para predecir las ventas sobre la base de los tres presupuestos de medios.
 
 ## ![](i1.png)
 
 **FIGURA 2.1.** El conjunto de datos de publicidad. El gráfico muestra las ventas, en miles de unidades, en función de los presupuestos de TV, radio y periódicos, en miles de dólares, para 200 mercados diferentes. En cada gráfico mostramos los mínimos cuadrados simples ajuste de las ventas a esa variable, como se describe en el Capítulo 3. En otras palabras, cada azul línea representa un modelo simple que se puede usar para predecir las ventas usando TV, radio, y periódico, respectivamente.
 
-De manera más general, supongamos que observamos una respuesta cuantitativa Y y p
-diferentes predictores, X1, X2, . . . , XP . Suponemos que hay alguna relación entre Y y X = (X1 , X2 , . . . , Xp ), que se puede escribir en la forma muy general.
+De manera más general, supongamos que observamos una respuesta cuantitativa Y y p diferentes predictores, X1, X2, . . . , XP . Suponemos que hay alguna relación entre Y y X = (X1 , X2 , . . . , Xp ), que se puede escribir en la forma muy general.
 
 ![](i2.png)
 
-Aquí f es una función fija pero desconocida de X1, . . . , Xp , y ϵ es aleatorio término de error, que es independiente de X y tiene media cero. En esta fórmulación, f representa la información sistemática que X proporciona sobre Y . Como otro ejemplo, considere el panel de la izquierda de la figura 2.2, un gráfico de ingresos versus años de educación para 30 personas en el conjunto de datos de Ingresos. La trama sugiere que uno podría predecir el ingreso usando años de educación. Sin embargo, la función f que conecta la variable de entrada a la variable de salida es en general desconocida. En esta situación se debe estimar
-f en base a los puntos observados. Como Ingreso es un conjunto de datos simulados, f es
-conocido y se muestra mediante la curva azul en el panel de la derecha de la Figura 2.2.
+Aquí f es una función fija pero desconocida de X1, . . . , Xp , y ϵ es aleatorio término de error, que es independiente de X y tiene media cero. En esta fórmulación, f representa la información sistemática que X proporciona sobre Y . Como otro ejemplo, considere el panel de la izquierda de la figura 2.2, un gráfico de ingresos versus años de educación para 30 personas en el conjunto de datos de Ingresos. La trama sugiere que uno podría predecir el ingreso usando años de educación. Sin embargo, la función f que conecta la variable de entrada a la variable de salida es en general desconocida. En esta situación se debe estimar f en base a los puntos observados. Como Ingreso es un conjunto de datos simulados, f es conocido y se muestra mediante la curva azul en el panel de la derecha de la Figura 2.2.
 
 ![](i3.png)
 
-**FIGURA 2.2. El conjunto de datos de ingresos. Izquierda: Los puntos rojos son los valores observados de ingresos (en decenas de miles de dólares) y años de educación para 30 personas Derecha: La curva azul representa la verdadera relación subyacente entre ingresos y años de educación, que generalmente se desconoce (pero se conoce en este caso porque los datos fueron simulados). Las líneas negras representan el error, asociado a cada observación. Tenga en cuenta que algunos errores son positivos (si una observacion se encuentra por encima de la curva azul) y algunos son negativos (si una observacion se encuentra debajo de la curva). En general, estos errores tienen aproximadamente una media de cero.**
+**FIGURA 2.2.** El conjunto de datos de ingresos. Izquierda: Los puntos rojos son los valores observados de ingresos (en decenas de miles de dólares) y años de educación para 30 personas Derecha: La curva azul representa la verdadera relación subyacente entre ingresos y años de educación, que generalmente se desconoce (pero se conoce en este caso porque los datos fueron simulados). Las líneas negras representan el error, asociado a cada observación. Tenga en cuenta que algunos errores son positivos (si una observacion se encuentra por encima de la curva azul) y algunos son negativos (si una observacion se encuentra debajo de la curva). En general, estos errores tienen aproximadamente una media de cero.
 
 ## ¿Por qué estimar f?
 
@@ -47,12 +35,11 @@ En muchas situaciones, un conjunto de entradas X están fácilmente disponibles,
 
 ![](i4.png)
 
-En general, la función f puede involucrar más de una variable de entrada.
-En la Figura 2.3 representamos el ingreso en función de los años de educación y antigüedad. Aquí f es una superficie bidimensional que debe ser estimada en base a los datos observados.
+En general, la función f puede involucrar más de una variable de entrada. En la Figura 2.3 representamos el ingreso en función de los años de educación y antigüedad. Aquí f es una superficie bidimensional que debe ser estimada en base a los datos observados.
 
 ![](i5.png){fig-align="center" width="512"}
 
-**FIGURA 2.3. El gráfico muestra los ingresos como una función de los años de educación y antigüedad en el conjunto de datos Ingresos. La superficie azul representa la verdadera relación subyacente entre ingresos y años de educación y antigüedad, que se conoce ya que los datos son simulados. Los puntos rojos indican los valores observados de estas cantidades para 30 individuos.**
+**FIGURA 2.3.** El gráfico muestra los ingresos como una función de los años de educación y antigüedad en el conjunto de datos Ingresos. La superficie azul representa la verdadera relación subyacente entre ingresos y años de educación y antigüedad, que se conoce ya que los datos son simulados. Los puntos rojos indican los valores observados de estas cantidades para 30 individuos.
 
 ## ¿Cómo estimamos f?
 
@@ -64,25 +51,17 @@ Estas observaciones se denominan datos de entrenamiento porque usaremos estas ob
 
 ## Métodos paramétricos
 
-Los métodos paramétricos implican un enfoque basado en modelos de dos pasos.
-**1.** Primero, hacemos una suposición sobre la forma funcional, o forma,
-apagado . Por ejemplo, una suposición muy simple es que f es lineal en
+Los métodos paramétricos implican un enfoque basado en modelos de dos pasos. **1.** Primero, hacemos una suposición sobre la forma funcional, o forma, apagado . Por ejemplo, una suposición muy simple es que f es lineal en
 
 **X: f (X) = β0 + β1 X1 + β2 X2 + · · · + βp Xp .**
 
-Este es un modelo lineal, que se analizará extensamente en el capítulo
-ter 3. Una vez que hemos supuesto que f es lineal, el problema de estimación
-ing f se simplifica enormemente. En lugar de tener que estimar un total
-función p-dimensional arbitraria f (X), solo se necesita estimar
-los coeficientes **p + 1 β0 , β1 , . . . , βp .**
-**2.** Después de seleccionar un modelo, necesitamos un procedimiento que use el
-datos de entrenamiento para ajustar o entrenar el modelo. En el caso del modelo lineal, necesitamos estimar los parámetros β0, β1, . . . , βp . Es decir, queremos encontrar valores de estos parámetros tales que
+Este es un modelo lineal, que se analizará extensamente en el capítulo ter 3. Una vez que hemos supuesto que f es lineal, el problema de estimación ing f se simplifica enormemente. En lugar de tener que estimar un total función p-dimensional arbitraria f (X), solo se necesita estimar los coeficientes **p + 1 β0 , β1 , . . . , βp .** **2.** Después de seleccionar un modelo, necesitamos un procedimiento que use el datos de entrenamiento para ajustar o entrenar el modelo. En el caso del modelo lineal, necesitamos estimar los parámetros β0, β1, . . . , βp . Es decir, queremos encontrar valores de estos parámetros tales que
 
 **Y ≈ β 0 + β1 X1 + β2 X2 + · · · + βp Xp .**
 
 ![](i6.png){fig-align="center" width="559"}
 
-**FIGURA 2.4. Un modelo lineal ajustado por mínimos cuadrados a los datos de ingresos de la figura 2.3. Las observaciones se muestran en rojo y el plano amarillo indica el ajuste de mínimos cuadrados a los datos.**
+**FIGURA 2.4.** Un modelo lineal ajustado por mínimos cuadrados a los datos de ingresos de la figura 2.3. Las observaciones se muestran en rojo y el plano amarillo indica el ajuste de mínimos cuadrados a los datos.
 
 El enfoque basado en modelos que se acaba de describir se conoce como paramétrico; reduce el problema de estimar f a uno de estimar un conjunto de parámetros. Asumir una forma paramétrica para f simplifica el problema de estimar f porque generalmente es mucho más fácil estimar un conjunto de parámetros, como β0, β1, . . . , βp en el modelo lineal, que ajustar una función f completamente arbitraria. La desventaja potencial de un enfoque paramétrico es que el modelo que elegimos generalmente no coincidirá con la verdadera forma desconocida de f .
 
@@ -92,8 +71,96 @@ La figura 2.4 muestra un ejemplo del enfoque paramétrico aplicado a los datos d
 
 ![](i8.png){fig-align="center"}
 
-**FIGURA 2.5. En amarillo, se muestra un ajuste spline de placa delgada uniforme a los datos de ingresos de la figura 2.3; las observaciones se muestran en rojo.**
+**FIGURA 2.5.** En amarillo, se muestra un ajuste spline de placa delgada uniforme a los datos de ingresos de la figura 2.3; las observaciones se muestran en rojo.
 
 ## Métodos no paramétricos
 
-Los métodos no paramétricos no hacen suposiciones explícitas sobre la forma funcional de f. En su lugar, buscan una estimación de f que se acerque lo más posible a los puntos de datos sin ser demasiado tosco o ondulado. Dichos enfoques pueden tener una gran ventaja sobre los enfoques paramétricos: al evitar la suposición de una forma funcional particular para f , tienen el potencial de adaptarse con precisión a una gama más amplia de formas posibles para f . Cualquier enfoque paramétrico trae consigo la posibilidad de que la forma funcional utilizada para estimar f sea muy diferente de la f verdadera, en cuyo caso el modelo resultante no se ajustará bien a los datos. ds
+Los métodos no paramétricos no hacen suposiciones explícitas sobre la forma funcional de f. En su lugar, buscan una estimación de f que se acerque lo más posible a los puntos de datos sin ser demasiado tosco o ondulado. Dichos enfoques pueden tener una gran ventaja sobre los enfoques paramétricos: al evitar la suposición de una forma funcional particular para f , tienen el potencial de adaptarse con precisión a una gama más amplia de formas posibles para f . Cualquier enfoque paramétrico trae consigo la posibilidad de que la forma funcional utilizada para estimar f sea muy diferente de la f verdadera, en cuyo caso el modelo resultante no se ajustará bien a los datos.
+
+![](i9.png){fig-align="center" width="556"}
+
+**FIGURA 2.6.** Un spline de placa delgada áspera se ajusta a los datos de ingresos de la figura 2.3. Este ajuste no comete errores en los datos de entrenamiento.
+
+## La compensación entre la precisión de la predicción y el modelo Interpretabilidad
+
+De los muchos métodos que examinamos en este libro, algunos son menos flexibles o más restrictivos, en el sentido de que pueden producir solo un rango relativamente pequeño de formas para estimar f. Por ejemplo, la regresión lineal es un enfoque relativamente inflexible, porque solo puede generar funciones lineales como las líneas que se muestran en la Figura 2.1 o el plano que se muestra en la Figura 2.4.
+
+![](i10.png){fig-align="center" width="640"}
+
+**FIGURA 2.7.** Una representación de la compensación entre flexibilidad e interpretabilidad, utilizando diferentes métodos de aprendizaje estadístico. En general, a medida que aumenta la flexibilidad de un método, disminuye su interpretabilidad.
+
+Hemos establecido que cuando la inferencia es el objetivo, existen claras ventajas en el uso de métodos de aprendizaje estadístico simples y relativamente inflexibles. En algunos entornos, sin embargo, solo estamos interesados en la predicción, y la interpretabilidad del modelo predictivo simplemente no es de interés. Por ejemplo, si buscamos desarrollar un algoritmo para predecir el precio de una acción, nuestro único requisito para el algoritmo es que prediga con precisión; la interpretabilidad no es una preocupación. En este escenario, podemos esperar que sea mejor usar el modelo más flexible disponible.
+
+## Aprendizaje supervisado versus no supervisado
+
+La mayoría de los problemas de aprendizaje estadístico se clasifican en una de dos categorías:
+
+supervisado o no supervisado. Todos los ejemplos que hemos discutido hasta ahora en este capítulo caen en el dominio del aprendizaje supervisado.
+
+Por el contrario, el aprendizaje no supervisado describe la situación algo más desafiante en la que para cada observación i = 1, . . . , n, observamos un vector de medidas xi pero sin respuesta asociada yi .
+
+Deseamos ajustar un modelo que relacione la respuesta con los predictores, con el objetivo de predecir con precisión la respuesta para futuras observaciones (predicción) o comprender mejor la relación entre
+
+la respuesta y los predictores (inferencia). No es posible ajustar un modelo de regresión lineal, ya que no hay una variable de respuesta que predecir. En este escenario, en cierto sentido estamos trabajando a ciegas; la situación se denomina no supervisada porque carecemos de una variable de respuesta que pueda supervisar nuestro análisis. ¿Qué tipo de análisis estadístico es posible? Podemos buscar comprender las relaciones entre las variables o entre las observaciones. Una herramienta de aprendizaje estadístico que podemos usar.
+
+![](i11.png){fig-align="center" width="650"}
+
+**FIGURA 2.8.** Un conjunto de datos de agrupamiento que involucra tres grupos. Cada grupo se muestra con un símbolo de color diferente. Izquierda: Los tres grupos están bien separados. En este contexto, un enfoque de agrupamiento debería identificar con éxito los tres grupos. Derecha: Hay cierta superposición entre los grupos. Ahora la tarea de agrupamiento es más desafiante.
+
+Muchos problemas caen naturalmente en los paradigmas de aprendizaje supervisado o no supervisado. Sin embargo, a veces la cuestión de si un análisis debe considerarse supervisado o no supervisado es menos clara. Por ejemplo, supongamos que tenemos un conjunto de n observaciones. Para m de las observaciones, donde m \< n, tenemos medidas predictoras y una medida de respuesta. Para las n − m observaciones restantes, tenemos mediciones predictivas pero no mediciones de respuesta. Tal escenario puede surgir si los predictores se pueden medir de manera relativamente económica, pero las respuestas correspondientes son mucho más costosas de recopilar.
+
+## Problemas de regresión versus clasificación
+
+Las variables se pueden caracterizar como cuantitativas o cualitativas (también conocidas como categóricas). Las variables cuantitativas toman valores numéricos. Los ejemplos incluyen la edad, la altura o los ingresos de una persona, el valor de una casa y el precio de una acción. Por el contrario, las variables cualitativas toman valores en una de K clases o categorías diferentes. Los ejemplos de variables cualitativas incluyen el estado civil de una persona (casada o no), la marca del producto comprado (marca A, B o C), si una persona no paga una deuda (sí o no) o un diagnóstico de cáncer (mielogenosis aguda). leucemia, leucemia linfoblástica aguda o sin leucemia).
+
+Tendemos a seleccionar métodos de aprendizaje estadístico sobre la base de si la respuesta es cuantitativa o cualitativa; es decir, podríamos usar la regresión lineal cuando sea cuantitativa y la regresión logística cuando sea cualitativa. Sin embargo, si los predictores son cualitativos o cuantitativos generalmente se considera menos importante.
+
+## Evaluación de la precisión del modelo
+
+Uno de los objetivos clave de este libro es presentar al lector una amplia gama de métodos de aprendizaje estadístico que se extienden mucho más allá del enfoque de regresión lineal estándar. ¿Por qué es necesario introducir tantos enfoques diferentes de aprendizaje estadístico, en lugar de un único método óptimo? No hay comida gratis en estadística: ningún método domina a todos los demás sobre todos los conjuntos de datos posibles. En un conjunto de datos en particular, un método específico puede funcionar mejor, pero algún otro método puede funcionar mejor en un conjunto de datos similar pero diferente. Por lo tanto, es una tarea importante decidir para cualquier conjunto dado de datos
+
+qué método produce los mejores resultados. Seleccionar el mejor enfoque puede ser una de las partes más desafiantes de realizar el aprendizaje estadístico en la práctica.
+
+## Medición de la calidad del ajuste
+
+Para evaluar el rendimiento de un método de aprendizaje estadístico en un conjunto de datos dado, necesitamos alguna forma de medir qué tan bien sus predicciones coinciden realmente con los datos observados. Es decir, necesitamos cuantificar hasta qué punto el valor de respuesta pronosticado para una observación determinada se acerca al valor de respuesta real para esa observación. En el entorno de regresión, la medida más utilizada es el error cuadrático medio (MSE), dado por:
+
+![](i12.png){fig-align="center"}
+
+Formula (2.5)
+
+Expresándolo más matemáticamente, supongamos que ajustamos nuestro método de aprendizaje estadístico a nuestras observaciones de entrenamiento {(x1, y1), (x2, y2), . . . , (xn , yn )}, y obtenemos la estimación fˆ. Entonces podemos calcular fˆ(x1 ), fˆ(x2 ), . . . , fˆ(xn). Si estos son aproximadamente iguales a y1 , y2 , . . . , yn , entonces el MSE de entrenamiento dado por (2.5) es pequeño. Sin embargo, en realidad no nos interesa saber si fˆ(xi ) ≈ yi ; en su lugar, queremos saber si fˆ(x0 ) es aproximadamente igual a y0 , donde (x0 , y0 ) es una observación de prueba no vista anteriormente que no se usa para entrenar el método de aprendizaje estadístico. Queremos elegir el método que proporcione el MSE de prueba más bajo, a diferencia del MSE de entrenamiento más bajo.
+
+![](i13.png){fig-align="center"}
+
+Formula (2.6)
+
+![](i14.png){fig-align="center"}
+
+**FIGURA 2.9.** Izquierda: Datos simulados de f , mostrados en negro. Se muestran tres estimaciones de f: la línea de regresión lineal (curva naranja) y dos ajustes spline de suavizado (curvas azul y verde). Derecha: MSE de entrenamiento (curva gris), MSE de prueba (curva roja) y MSE de prueba mínimo posible sobre todos los métodos (línea discontinua). Los cuadrados representan los MSE de entrenamiento y prueba para los tres ajustes que se muestran en el panel de la izquierda.
+
+Desafortunadamente, hay un problema fundamental con esta estrategia: hay no hay garantía de que el método con el MSE de entrenamiento más bajo también tienen el MSE de prueba más bajo. A grandes rasgos, el problema es que muchos los métodos estadísticos estiman específicamente los coeficientes para minimizar el MSE del conjunto de entrenamiento. Para estos métodos, el MSE del conjunto de entrenamiento puede ser bastante pequeño, pero el MSE de prueba suele ser mucho mayor. La Figura 2.9 ilustra este fenómeno con un ejemplo simple. En el panel de la izquierda de la figura 2.9, hemos generado observaciones a partir de (2.1) con la verdadera f dada por la curva negra. Las curvas naranja, azul y verde ilustran tres posibles estimaciones de f obtenidas utilizando métodos con niveles crecientes de flexibilidad. La línea naranja es el ajuste de regresión lineal, que es relativamente inflexible.
+
+En el panel de la derecha de la Figura 2.9, como la flexibilidad de la estadística aumenta el método de aprendizaje, observamos una disminución monótona en el MSE de entrenamiento y una forma de U en el MSE de prueba. Esta es una propiedad fundamental del aprendizaje estadístico que se mantiene independientemente del conjunto de datos en cuestión y del método estadístico que se utilice. A medida que aumenta la flexibilidad del modelo, el MSE de entrenamiento disminuirá, pero es posible que no lo haga el MSE de prueba. Cuando un método dado produce un MSE de entrenamiento pequeño pero un MSE de prueba grande, se dice que estamos sobreajustando los datos.
+
+![](i15.png){fig-align="center"}
+
+**FIGURA 2.10.** Los detalles son como en la figura 2.9, usando una f verdadera diferente que es mucho más cercana a la lineal. En esta configuración, la regresión lineal proporciona un muy buen ajuste a los datos.
+
+La prueba MSE. Sin embargo, debido a que la verdad es casi lineal, el MSE de prueba solo disminuye ligeramente antes de volver a aumentar, de modo que el ajuste de mínimos cuadrados naranja es sustancialmente mejor que la curva verde altamente flexible. Finalmente, la figura 2.11 muestra un ejemplo en el que f es altamente no lineal. Las curvas MSE de entrenamiento y de prueba siguen mostrando los mismos patrones generales, pero ahora hay una disminución rápida en ambas curvas antes de que la MSE de prueba comience a aumentar lentamente. En la práctica, normalmente se puede calcular el MSE de entrenamiento con relativa facilidad, pero estimar el MSE de prueba es considerablemente más difícil porque normalmente no hay datos de prueba disponibles. Como ilustran los tres ejemplos anteriores.
+
+El nivel de flexibilidad correspondiente al modelo con el MSE de prueba mínimo puede variar considerablemente entre los conjuntos de datos.
+
+## El equilibrio entre sesgo y varianza
+
+La forma de U observada en las curvas de prueba MSE (Figuras 2.9--2.11) resulta ser el resultado de dos propiedades en competencia de los métodos de aprendizaje estadístico. Aunque la prueba matemática está más allá del alcance de este libro, es posible demostrar que el MSE de prueba esperado, para un valor x0 dado, siempre se puede descomponer en la suma de tres cantidades fundamentales: la varianza de fˆ(x0), la sesgo al cuadrado de fˆ(x0 ) y la varianza del error.
+
+![](i16.png){fig-align="center"}
+
+**FIGURA 2.11.** Los detalles son como en la Figura 2.9, usando una f diferente que está lejos de ser lineal. En esta configuración, la regresión lineal proporciona un ajuste muy pobre a los datos.
+
+términos ϵ. Eso es,
+
+![](i17.png){fig-align="center"}
+
+Por otro lado, el sesgo se refiere al error que se introduce al aproximar un problema de la vida real, que puede ser extremadamente complicado, por un modelo mucho más simple. Por ejemplo, la regresión lineal supone que existe una relación lineal entre Y y X1, X2, . . ., XP . Es poco probable que cualquier problema de la vida real realmente tenga una relación lineal tan simple, por lo que realizar una regresión lineal sin duda dará como resultado algún sesgo en la estimación de f. En la figura 2.11, la verdadera f es sustancialmente no lineal, por lo que no importa cuántas observaciones de entrenamiento recibamos, no será posible producir una estimación precisa mediante la regresión lineal. En otras palabras, la regresión lineal da como resultado un alto sesgo en este ejemplo. Sin embargo, en la figura 2.10, la verdadera f es muy cercana a la lineal, por lo que, dados suficientes datos, debería ser posible que la regresión lineal produzca una estimación precisa. Generalmente, los métodos más flexibles resultan en menos sesgo.
