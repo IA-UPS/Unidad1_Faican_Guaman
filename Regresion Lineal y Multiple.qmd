@@ -164,3 +164,294 @@ términos ϵ. Eso es,
 ![](i17.png){fig-align="center"}
 
 Por otro lado, el sesgo se refiere al error que se introduce al aproximar un problema de la vida real, que puede ser extremadamente complicado, por un modelo mucho más simple. Por ejemplo, la regresión lineal supone que existe una relación lineal entre Y y X1, X2, . . ., XP . Es poco probable que cualquier problema de la vida real realmente tenga una relación lineal tan simple, por lo que realizar una regresión lineal sin duda dará como resultado algún sesgo en la estimación de f. En la figura 2.11, la verdadera f es sustancialmente no lineal, por lo que no importa cuántas observaciones de entrenamiento recibamos, no será posible producir una estimación precisa mediante la regresión lineal. En otras palabras, la regresión lineal da como resultado un alto sesgo en este ejemplo. Sin embargo, en la figura 2.10, la verdadera f es muy cercana a la lineal, por lo que, dados suficientes datos, debería ser posible que la regresión lineal produzca una estimación precisa. Generalmente, los métodos más flexibles resultan en menos sesgo.
+
+# 3.6 Laboratorio
+
+### Librerias
+
+```{r}
+library(MASS)
+library(ISLR2)
+```
+
+### Regresión Lineal Simple
+
+-   `ISRL2` Contiene informacion de Boston
+
+-   `medv` Valor medio de la vivienda de 506 secciones ceensales de Boston
+
+-   `rm` Número medio de habitaciones por casa
+
+-   `lstat` Porcentaje de hogares con un status socioeconómico bajo
+
+```{r}
+head(Boston)
+```
+
+-   La función `lm()` sirve para ajustar a una regresión simple
+
+-   La función `medv()` Es la respuesta y
+
+-   La función `lstat()` Es el predictor x
+
+El error se debe a que R no sabe donde encontrar esos valores, por lo que en la siguiente linea se coloca Boston.
+
+```{r}
+lm.fit <- lm ( medv~lstat , data = Boston )
+attach ( Boston )
+lm.fit <- lm ( medv~lstat )
+```
+
+-   La función `lm.fit` permite acceder a información básica sobre el modelo.
+
+-   La función `summary(lm.fit)` nos da los valores p y los errores estándar de los coeficientes, así como el estadístico R2 y el estadístico F del modelo.
+
+```{r}
+lm.fit
+summary(lm.fit)
+```
+
+-   La función `names()` permit4e averiguar qué otras piezas de información se almacenan en `lm.fit`. Aunque podemos extraer por su nombre `lm.fit$coefficients`. Además, se pueden utilizar las funciones extractoras como `coef()` para acceder a ellos.
+
+```{r}
+names(lm.fit)
+coef(lm.fit)
+```
+
+-   La función `confint()` obtiene un intervalo de confianza para los coeficientes estimados.
+
+```{r}
+confint(lm.fit)
+```
+
+-   La función `predict()` puede utilizarse para producir intervalos de confianza y para la predicción de `medv()` para un valor dado de `lstat()`.
+
+```{r}
+predict(lm.fit , data.frame(lstat = (c(5 , 10 , 15))) ,
+interval = "confidence")
+predict(lm.fit , data.frame(lstat = (c(5 , 10 , 15))) ,
+interval = "prediction")
+```
+
+Ahora trazaremos `medv()` y `lstat()` junto con la línea de regresión por mínimos cuadrados mediante las funciones `plkot()` y `abline()`.
+
+```{r}
+plot ( lstat , medv )
+abline ( lm.fit )
+```
+
+-   La función `abline()` sirve para dibujar cualquier línea, no sólo la línea de regresión por mínimos cuadrados. Podemos dibujar una recta con intercepto a y pendiente b, escribimos abline(a, b).
+
+-   El comando `lwd=3` hace que la anchura de la línea de regresión se incremente en un factor de 3.
+
+-   La funcion `pch()` se utiliza para crear símbolos de trazado diferentes.
+
+```{r}
+plot(lstat , medv )
+abline(lm.fit, lwd = 3)
+abline(lm.fit, lwd= 3 , col = " red ")
+plot(lstat, medv , col = " red ")
+plot(lstat, medv , pch = 20)
+plot(lstat, medv , pch = " + ")
+plot(1:20, 1:20 , pch = 1:20)
+```
+
+-   Cuatro diagramas de diagnóstico se producen al aplicar la función `plot()` directamente a la salida de `lm()`. Este comando producirá un gráfico a la vez, y al presionar Enter se generará el siguiente gráfico. Sin embargo, es conveniente ver los cuatro gráficos juntos.
+
+-   Las funciones `par()` y `mfrow()`, dicen a R que divida la pantalla en paneles separados para ver varios gráficos simultáneamente.
+
+```{r}
+par(mfrow = c(2,2))
+plot(lm.fit)
+```
+
+-   La función `residuals()` permite calcular los residuos de un ajuste de regresión lineal.
+
+-   La función `rstudent()` devolverá los residuos estudentizados, y podemos usarla para graficar los residuos contra los valores ajustados.
+
+```{r}
+plot(predict(lm.fit), residuals(lm.fit))
+plot(predict(lm.fit), rstudent(lm.fit))
+```
+
+-   Mediante la función `hatvalues()` se pueden calcular las estadísticas de apalancamiento para cualquier número de predictores.
+
+```{r}
+plot(hatvalues(lm.fit))
+which.max(hatvalues(lm.fit))
+```
+
+-   La función `which.max()` identifica el índice del elemento más grande de un vector (observación que tiene la estadística de apalancamiento más grande).
+
+###  Regresión Lineal Múltiple
+
+-   La función `lm()`se utiliza para ajustar un modelo de regresión lineal múltiple por mínimos cuadrados
+
+-   La sintaxis `lm(y ∼ x1 + x2 + x3)` se utiliza para ajustar un modelo con tres predictores, x1, x2 y x3.
+
+-   La función `summary()`muestra ahora los coeficientes de regresión de todos los predictores.
+
+```{r}
+lm.fit <- lm(medv ~ lstat + age, data = Boston)
+summary(lm.fit)
+```
+
+El conjunto de datos de Boston contiene 12 variables, y no se pretende realizar una regresión utilizando todos los predictores:
+
+```{r}
+lm.fit <- lm(medv ~ ., data = Boston)
+summary(lm.fit)
+```
+
+-   La función `summary(lm.fit)$r.sq`nos permite obtener el R², y `summary(lm.fit)$sigma` nos da el RSE.
+
+-   La función `vif()` se utiliza para calcular los factores de inflación de la varianza.
+
+```{r}
+library(car)
+vif(lm.fit)
+```
+
+Si queremos realizar una regresión excluyendo un predictor, en este caso vamos a excluir a la edad:
+
+```{r}
+lm.fit1 <- lm(medv ~ . - age, data = Boston)
+summary(lm.fit1)
+```
+
+-   Otra opción para excluir a un predictor es `update()`.
+
+```{r}
+lm.fit1 <- update(lm.fit, ~ . - age)
+```
+
+### Términos de Interacción
+
+-   La función `lm()`permite incluir términos de interacción en un modelo lineal.
+
+-   La sintaxis `lstat:black` indica a R que incluya un término de interacción entre lstat y black.
+
+-   La sintaxis `lstat * edad` incluye lstat, la edad.
+
+-   El término de interacción `lstat * edad` se refiere que son predictores.
+
+```{r}
+summary(lm(medv ~ lstat * age, data = Boston))
+```
+
+### Transformaciones No Lineales de los Predictores
+
+-   La función `lm()` puede acomodar transformaciones no lineales de los predictores.
+
+Tenemos un predictor X y se puede crear un predictor X² utilizando `I(X²)`**.**
+
+```{r}
+lm.fit2 <- lm(medv ~ lstat + I(lstat^2))
+summary(lm.fit2)
+```
+
+El valor p casi nulo asociado al término cuadrático conduce a un modelo mejorado.
+
+-   La función`anova()` sirve para profundizar el análisis de en qué medida el ajuste cuadrático es superior al lineal.
+
+```{r}
+lm.fit <- lm(medv ~ lstat)
+anova(lm.fit, lm.fit2)
+```
+
+En estas líneas se puede observar que el Modelo 1 representa el submodelo lineal que contiene un solo predictor lstat, mientras que el Modelo 2 corresponde al modelo cuadrático más amplio que tiene dos predictores, lstat y lstat2.
+
+-   La función `anova()` realiza una prueba de hipótesis, compara los dos modelos.
+
+-   La hipótesis nula es que los dos modelos se ajustan igual de bien a los datos.
+
+-   La hipótesis alternativa es que el modelo completo es superior.
+
+Se puede observar que el estadístico F es 135 y el valor p asociado es prácticamente cero. Esto demuestra que el modelo que contiene los predictores `lstat` y `lstat2` es muy superior al modelo que sólo contiene el predictor `lstat`.
+
+```{r}
+ par(mfrow = c(2,2))
+ plot(lm.fit2)
+```
+
+-   La función `poly()` se utiliza para crear un polinomio dentro de `lm()`, se va a producir un ajuste polinómico de quinto orden.
+
+```{r}
+lm.fit5 <- lm(medv ~ poly(lstat, 5))
+summary(lm.fit5)
+```
+
+Esto sugiere que la inclusión de términos polinómicos adicionales, de hasta quinto orden, mejora el ajuste del modelo. Sin embargo los datos revela que ningún término polinómico más allá del quinto orden tiene valores p significativos en un ajuste de regresión.
+
+-   Un modelo lineal aplicado a la salida de la función `poly()` tendrá los mismos valores ajustados, que un modelo lineal aplicado a los polinomios brutos.
+
+```{r}
+summary(lm(medv ~ log(rm), data = Boston))
+```
+
+### Predictores Cualitativos
+
+Se examinarán los datos de Carseats que forman parte de la biblioteca ISLR2. Intentaremos predecir las Ventas en 400 localidades basándonos en una serie de predictores.
+
+```{r}
+head(Carseats)
+```
+
+Los datos de Carseats incluyen predictores cualitativos como el `Shelveloc`, un indicador de la calidad de la estantería, etc.
+
+El indicador `Shelveloc` adopta tres valores posibles: Malo, Medio y Bueno, a partir de esto R genera variables ficticias automáticamente.
+
+```{r}
+lm.fit <- lm(Sales ~ . + Income:Advertising + Price:Age, data = Carseats)
+summary(lm.fit)
+```
+
+-   La función `contrasts()`devuelve la codificación que R utiliza para la variable ficticia.
+
+```{r}
+attach(Carseats)
+contrasts(ShelveLoc)
+```
+
+-   La variable ficticia `ShelveLocGood` toma un valor de 1 si la ubicación de la estantería es buena, y 0 en caso contrario.
+
+-   La variable ficticia `ShelveLocMedium` es igual a 1 si la ubicación de la estantería es media, y 0 en caso contrario.
+
+-   Si el `coeﬃcient` para `ShelveLocGood` de la regresión es positivo indica que una buena ubicación de las estanterías, mientras que si `ShelveLocMedium` tiene un `coeﬃcient` positivo menor, indica una ubicación media de la estantería la cual se asocia con mayores ventas.
+
+### Funciones de Escritura
+
+R viene con muchas funciones útiles, y disponibles a través de las bibliotecas. Sin embargo, a menudo vamos a realizar operaciones para las que no hay ninguna función disponible.
+
+Una función que lee las bibliotecas `ISRL2` y `MASS` es `LoadLibraries()`**,** sin embargo sale error ya que no está creada una función.
+
+![](i20.png){fig-align="center"}
+
+-   Los símbolos `+` son impresos por R y no deben escribirse.
+
+-   El símbolo `{` informa a R que varios comandos están por ser ingresados, finalmente el símbolo `}` informa que no se introducirán más comandos.
+
+```{r}
+LoadLibraries <- function() {
+  library(ISLR2)
+  library(MASS)
+  print("Las bibliotecas han sido cargadas.")
+  }
+```
+
+-   La función `LoadLibraries` permite a R que nos informe que hay en la función.
+
+```{r}
+LoadLibraries
+function(){
+  library(ISLR2)
+  library(MASS)
+  print("Las bibliotecas han sido cargadas.")
+}
+```
+
+Si llamamos a la funciones, las librerias se cargan.
+
+```{r}
+LoadLibraries()
+```
