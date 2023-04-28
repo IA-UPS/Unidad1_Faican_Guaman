@@ -5,7 +5,7 @@ format: pdf
 editor: visual
 ---
 
-## Capitulo #2
+## Capitulo 2
 
 ## ¿Qué es el aprendizaje estadístico?
 
@@ -165,6 +165,252 @@ términos ϵ. Eso es,
 
 Por otro lado, el sesgo se refiere al error que se introduce al aproximar un problema de la vida real, que puede ser extremadamente complicado, por un modelo mucho más simple. Por ejemplo, la regresión lineal supone que existe una relación lineal entre Y y X1, X2, . . ., XP . Es poco probable que cualquier problema de la vida real realmente tenga una relación lineal tan simple, por lo que realizar una regresión lineal sin duda dará como resultado algún sesgo en la estimación de f. En la figura 2.11, la verdadera f es sustancialmente no lineal, por lo que no importa cuántas observaciones de entrenamiento recibamos, no será posible producir una estimación precisa mediante la regresión lineal. En otras palabras, la regresión lineal da como resultado un alto sesgo en este ejemplo. Sin embargo, en la figura 2.10, la verdadera f es muy cercana a la lineal, por lo que, dados suficientes datos, debería ser posible que la regresión lineal produzca una estimación precisa. Generalmente, los métodos más flexibles resultan en menos sesgo.
 
+## Capitulo 3
+
+### Regresión lineal
+
+La regresión lineal es una herramienta útil para predecir una respuesta cuantitativa es un método de aprendizaje estadístico útil y ampliamente utilizado
+
+### Regresión lineal simple
+
+Se denomina como un enfoque sencillo que tiene un enfoque para predecir una respuesta cuantitativav y sobre la base de una única variable predictora X. Es muy importate que existe una relación aproximadamente lineal entre X y Y.
+
+Matemáticamente, podemos escribir esta relación lineal como:
+
+```{r}
+                        Y≈ β0+β1X. 
+```
+
+Son dos constantes desconocidas que representan:
+
+β0 = El interceptor
+
+β1= pendiente
+
+Representan un modelo de coeficientes de parámetros el mismo que nos permite predecir estimaciones β̂0 y β̂1para los coeficientes del modelo:
+
+```{r}
+                       ŷ=β̂0+β̂1X
+```
+
+-   ŷ indica una predicción de Y sobre la base deX=X.
+
+Aquí usamos un sombrero símbolo, ˆ , para denotar el valor estimado de un parámetro o coeficiente desconocido, o para denotar el valor predicho de la respuesta.
+
+### **Estimación de los coeficientes**
+
+Antes de utilizar diferentes formulas comerzaremos por estimar coeficientes:
+
+(X1, y1),(X2, y2), . . . ,(Xnorte, ynorte)
+
+**Ejemplo:** Presupuesto de publicidad televisiva y las ventas de productos en norte=200 mercados diferentes
+
+![](imagen1.jpeg)
+
+**El objetivo:** Es obtener estimaciones de coeficientes β̂0 y β̂i tal que el modelo lineal se ajuste bien a los datos disponibles, hay varias formas de medircercanía. Sin embargo el enfoque más común consiste en minimizar el mínimos cuadrados
+
+![](imagen2.jpeg)
+
+**Es asi que llegamos a la conclusion que:**
+
+-   Publicidad de datos y los mínimos cuadrados se ajustan a la regresión de ventas sobreTELEVISOR.
+
+-   El ajuste se obtiene minimizando la suma residual de cuadrados.
+
+-   Cada segmento de línea gris representa un residuo.
+
+-   En este caso, un ajuste lineal captura la esencia de la relación.
+
+Existen gráficos de contorno y tridimensionales del RSS en el Publicidad de datos, utilizando ventas como respuesta y TELEVISOR como predictor.
+
+Los puntos rojos corresponden a las estimaciones de mínimos cuadrados β̂0y β̂1
+
+![](imagen3.jpeg){fig-align="center"}
+
+**Evaluación de la precisión de las estimaciones del coeficiente** La verdadera relación entre X y Y toma la forma de:
+
+**Y=F(X) +ϵ**
+
+-   Para alguna función desconocida F, dónde **ϵ** es un término de error aleatorio de media cero.
+
+-   Si Fdebe aproximarse mediante una función lineal, entonces podemos escribir esta relación como **Y=β0+β1X+ϵ.**
+
+-   β0es el término de intersección en pocas palabras podemos decir que es el valor esperado de Y cuando X=0.
+
+-   β1es la pendiente asociado con un aumento de una unidad en X.
+
+-   ϵ es el error de un cajón de sastre
+
+    **La línea de regresión es la mejor aproximación lineal entre X y Y**
+
+    ![](imagen4.jpeg)
+
+-   La línea roja representa la verdadera relación,F(X) = 2 + 3X,que se conoce como la línea de regresión de la población.
+
+-   La línea azul es la línea de mínimos cuadrados; es la estimación de mínimos cuadrados para F(X) basado en los datos observados, mostrados en negro
+
+-   La línea de regresión de población se muestra nuevamente en rojo y la línea de mínimos cuadrados en azul oscuro.
+
+-   En azul claro, se muestran diez líneas de mínimos cuadrados, cada una calculada sobre la base de un conjunto aleatorio separado de observaciones.
+
+-   Cada línea de mínimos cuadrados es diferente, pero en promedio, las líneas de mínimos cuadrados están bastante cerca de la línea de regresión de población.
+
+**Es importante recalcar que la media muestral y la población son diferentes pero en general la media de la muestra proporcionará una buena estimación de la media de la población.**
+
+-   La analogía entre la regresión lineal y la estimación de la media de una variable aleatoria es adecuada basada en el concepto deinclinación.
+
+-   Si usamos la media muestra lµ̂ para estimar µ, esta estimación es imparcial
+
+**La analogía con la estimación de la media poblacional µ cde una variable aleatoria Y, calculando el Error estándar de µ**
+
+**Var(µ̂) = SE(µ̂)2= σ2**
+
+-   dónde σ es la desviación estándar.
+
+-   El error estándar nos dice la cantidad promedio que esta estimación µ̂ difiere del valor real de µ
+
+Para la regresión lineal, el intervalo de confianza del 95% para β1 aproximadamente toma la forma confianza **β̂1±2·SE(β̂1).**
+
+Hay aproximadamente un 95% de probabilidad de que el intervalo **β̂1−2·SE(β̂1), β̂1+2·SE(β̂1)**
+
+Contendrá el verdadero valor de β1, de manera que el intervalo de confianza para β0 aproximadamente toma la forma: **β̂0±2·SE(β̂0).**
+
+Para probar la hipótesis nula, necesitamos determinar si β̂1, por lo cuál es recomendado calcular unt-estadística que mide el número de desviaciones estándar que β̂1está lejos de 0.
+
+**Evaluación de la precisión del modelo** Al cuantificar la medida en que el modelo se ajusta a los datos. La calidad de un ajuste de regresión lineal generalmente se evalúa utilizando dos cantidades relacionadas:
+
+-   El error estándar residual (RSE) y
+
+-   El R2 estadística
+
+**Error estándar residual**
+
+Hay un término de error ϵ. Debido a la presencia de estos términos de error, incluso si conociéramos la verdadera línea de regresión.
+
+-   El RSE es una estimación de la desviación estándar de ϵ.
+
+-   En términos generales, es la cantidad promedio que la respuesta se desviará de la verdadera línea de regresión. Se calcula usando la fórmula:
+
+    ![](imagen5.jpeg)
+
+```{=html}
+<!-- -->
+```
+-   El RSE se considera una medida de la falta de ajuste del modelo a los datos.
+
+-   Si las predicciones obtenidas con el modelo están muy cerca de los valores reales de los resultados, es decir, siŷi≈yiparai=1, . . . , norte---entonces será pequeña y podemos concluir que el modelo se ajusta muy bien a los datos.
+
+-   Por otro lado, si ŷ iestá muy lejos deyipara una o más observaciones, entonces el RSE puede ser bastante grande, lo que indica que el modelo no se ajusta bien a los datos
+
+    **R2 Estadística**
+
+-   El RSE proporciona una medida absoluta de la falta de ajuste del modelo a los datos. Pero como se mide en las unidades de Y,no siempre está claro qué constituye una buena RSE.
+
+-   El R2 estadístico proporciona una medida alternativa de ajuste por lo que siempre toma un valor entre 0 y 1, y es independiente de la escala de Y.
+
+    ![](imagen6.jpeg)
+
+```{=html}
+<!-- -->
+```
+-   El R2 estadística es una medida de la relación lineal entre X y Y.
+
+-   Para probar la hipótesis nula, necesitamos determinar siβ̂1, nuestra estimación deβ1, está lo} suficientemente lejos de cero para que podamos estar seguros de queβ1es distinto de cero.
+
+-   Pero nosotros podemos rechazar la hipótesis nula---es decir podemos declararlo como una relación entre X y Y.
+
+Evaluación de la precisión del modelo
+
+Una vez que hemos rechazado la hipótesis nula a favor de la hipótesis alternativa , es natural querer cuantificarla medida en que el modelo se ajusta a los datos. La calidad de un ajuste de regresión lineal generalmente se evalúa utilizando dos cantidades relacionadas:
+
+-   El error estándar
+
+-   Error residual (RSE) y el
+
+-   R2 estadística.
+
+```         
+### **Error estándar residual**
+```
+
+-   El RSE es una estimación de la desviación estándar deϵ. En términos generales, es la cantidad promedio que la respuesta se desviará de la verdadera línea de regresión.
+
+-   El RSE se considera una medida de lafalta de ajuste del modelo a los datos. Si las predicciones obtenidas con el modelo están muy cerca de los valores reales de los resultados.
+
+-   Podenis concluir que el modelo se ajusta muy bien a los datos.
+
+    **R2 Estadística**
+
+    Existen caracteristicas muy esenciales como:
+
+-   Proporciona una medida absoluta de la falta de ajuste del modelo a los datos
+
+-   Proporciona una medida alternativa de ajuste.
+
+-   Toma la forma de un proporciónque se denomina como la varianza vpor lo que siempre toma un valor entre 0 y 1.
+
+    ### 
+
+    **Regresión lineal múltiple**
+
+-   La regresión lineal simple es un enfoque útil para predecir una respuesta sobre la base de una única variable predictora. Sin embargo, en la práctica a menudo tenemos más de un predictor.
+
+-   El enfoque de ajustar un modelo de regresión lineal simple separado para cada predictor no es del todo satisfactorio.
+
+**Es recomendado:**
+
+Debe tener un enfoque de ajustar un modelo de regresión lineal simple separado para cada predictor no es del todo satisfactorio
+
+-   En primer lugar, no está claro cómo hacer una única predicción de ventas dados los tres presupuestos de medios publicitarios, ya que cada uno de los presupuestos está asociado con una ecuación de regresión separada.
+
+-   Segundo, cada una de las tres ecuaciones de regresión ignora los otros dos medios al formar estimaciones para los coeficientes de regresión.
+
+En lugar de ajustar un modelo de regresión lineal simple separado para cada predictor, un mejor enfoque es extender el modelo de regresión lineal simple para que pueda acomodar directamente múltiples predictores.
+
+**Estimación de los coeficientes de regresión**
+
+-   Los parámetros se estiman utilizando el mismo enfoque de mínimos cuadrados que vimos en el contexto de la regresión lineal simple.
+
+-   El enfoque de usar estadística para probar cualquier asociación entre los predictores y la respuesta funciona cuandopages relativamente pequeño, y ciertamente pequeño en comparación connorte
+
+    **Selección de reenvío.**
+
+-   Empezamos con elmodelo nulo---un modelo que conadelante contiene un intercepto pero no predictores. Luego encajamospagre-lineal simpleselección regresiones y agregar al modelo nulo la variable que resulta en elmodelo nulo RSS más bajo
+
+    **Extensiones del Modelo Lineal**
+
+-   El modelo de regresión lineal estándar (3.19) proporciona resultados interpretables y funciona bastante bien en muchos problemas del mundo real.
+
+    **Correlación de términos de error**
+
+-   Una suposición importante del modelo de regresión lineal es que los términos de error,ϵ1, ϵ2, . . . , ϵnorte, no están correlacionados.
+
+    **Variación no constante de los términos de error**
+
+-   Los errores estándar, los intervalos de confianza y las pruebas de hipótesis asociadas con el modelo lineal se basan en esta suposición.
+
+    **Altos puntos de apalancamiento**
+
+    En una regresión lineal simple, las observaciones de alto apalancamiento son bastante fáciles de identificar, ya que simplemente podemos buscar observaciones para las cuales el valor del predictor está fuera del rango normal de las observaciones. Pero en una regresión lineal múltiple con muchos predictores, es posible tener una observación que esté dentro del rango de los valores de cada predictor individual, pero que sea inusual en términos del conjunto completo de predictores
+
+    **Colinealidad** Se refiere a la situación en la que dos o más variables predictoras están estrechamente relacionadas entre si, como se evidencia a continuación:
+
+    ![](imagen7.jpeg)
+
+    **Comparación de regresión lineal con k-Vecinos más cercanos**
+
+-   Los métodos paramétricos tienen varias ventajas.
+
+-   Suelen ser fáciles de ajustar, porque solo se necesita estimar un pequeño número de coeficientes.
+
+-   En el caso de la regresión lineal, los coeficientes tienen interpretaciones simples y las pruebas de significancia estadística se pueden realizar fácilmente.
+
+-   Pero los métodos paramétricos tienen una desventaja: por construcción, hacen fuertes suposiciones sobre la forma deF(X).
+
+-   Si la forma funcional especificada está lejos de la verdad, y nuestro objetivo es la precisión de la predicción, entonces el método paramétrico tendrá un desempeño deficiente.
+
+-   A diferencia de,no paramétricométodos no asumen explícitamente una forma paramétrica paraF(X) y, por lo tanto, proporcionar un enfoque alternativo y más flexible para realizar la regresión.
+
 # 3.6 Laboratorio
 
 ### Librerias
@@ -283,7 +529,7 @@ which.max(hatvalues(lm.fit))
 
 -   La función `which.max()` identifica el índice del elemento más grande de un vector (observación que tiene la estadística de apalancamiento más grande).
 
-###  Regresión Lineal Múltiple
+### Regresión Lineal Múltiple
 
 -   La función `lm()`se utiliza para ajustar un modelo de regresión lineal múltiple por mínimos cuadrados
 
